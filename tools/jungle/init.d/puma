@@ -133,7 +133,7 @@ do_stop_one() {
       log_daemon_msg "---> Puma $1 isn't running."
     else
       log_daemon_msg "---> About to kill PID `cat $PIDFILE`"
-      # pumactl --state $STATEFILE stop
+      # /usr/local/rbenv/shims/pumactl --state $STATEFILE stop
       # Many daemons don't delete their pidfiles when they exit.
       kill -9 $PID
     fi
@@ -164,7 +164,7 @@ do_restart_one() {
 
   if [ -e $PIDFILE ]; then
     log_daemon_msg "--> About to restart puma $1"
-    # pumactl --state $dir/tmp/pids/puma.state restart
+    # /usr/local/rbenv/shims/pumactl --state $dir/tmp/pids/puma.state restart
     kill -s USR2 `cat $PIDFILE`
     # TODO Check if process exist
   else
@@ -203,7 +203,7 @@ do_status_one() {
 
   if [ -e $PIDFILE ]; then
     log_daemon_msg "--> About to status puma $1"
-    pumactl --state $dir/tmp/pids/puma.state stats
+    /usr/local/rbenv/shims/pumactl --state $dir/tmp/pids/puma.state stats
     # kill -s USR2 `cat $PIDFILE`
     # TODO Check if process exist
   else
